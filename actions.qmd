@@ -1,0 +1,4 @@
+# Justificación de las acciones. 
+
+Ya comentamos que nuestras acciones, será la cantidad de producto que vamos a solicitar. Entonces nuestras acciones serán números 
+enteros y las acciones serán ejecutadas de forma instantea, al momento. 

@@ -1,0 +1,54 @@
+## Descripción y Justificación del Modelo. 
+El modelo @eq-ModelD pretende responder a la pregunta que denota el modelo ¿Cuánto producto tendré disponible al dia siguiente?. 
+Lo anterior menciona que nuestras etapas $t\in \mathcal{T} = \{t\in \mathbb{Z}^+: t\leq T,T\in \mathbb{N}\}$ representaran los dias dentro de un periodo $T$, $t$ hace referencia al dia actual, y $t+1$ al dia siguiente. Entonces el modelo general esta dado por 
+
+$$
+    X_{t+1} = (\text{Today} + \text{In}_t - \text{Out}_{t+1})^+.
+$$  
+
+Esto es, la parte positiva del producto que hay "hoy", es decir, $X_t$. A eso le agregaremos el producto que entrará hoy al final 
+del dia, en nuestro modelo solo habrá ingreso de producto mediante solicitud (En este caso no consideramos un almacenimiento dentro 
+del supermercado), entonces $\text{In}_t$ esta dado por nuestras acciones $\text{In}_t = a_t$. 
+
+La parte que saldrá consta de dos elementos. En general consideramos la cantidad de producto que se compró en el dia $t$. Sin embargo, 
+desconocemos la cantidad requerida, haciendo referencia al dia siguiente. Por lo tanto la demanda está representada por $D_{t+1}$, 
+la cantidad de producto requerida al dia siguiente. En nuestro modelo también consideramos la salida de producto por considerarse 
+producto no apto para la venta. Entonces 
+
+$$
+    \text{Out}_t = D_{t + 1} + N_t(X_t).
+$$
+
+Bajo de la suposición que todos los productos poseen el mismo tiempo de vida con periodos de vida distintos supondremos que cada dia, 
+al final, se retira un factor con respecto a la cantidad actual de producto. 
+$$
+    N_t = \eta X_t
+$$
+
+$$
+    \text{Out}_t = D_{t + 1} + \eta X_t
+$$
+
+Finalmente, nos queda definir la función de costo, en nuestro modelo será la ganancia. Al considerar un periodo finito tenemos que la 
+ganancia total $G$ esta dada por 
+
+$$
+    G(x_0, \pi) = \sum_{t=0}^{T} G_t(X_t, a_t),X_0 = x_0, X_{t+1} = f(X_t, a_t).
+$$
+
+donde $\pi$ es una politica, $\pi = (a_0,a_1, \ldots, a_{N-1})$. y $G_t$ es la ganancia por etapa, en nuestro caso
+$$
+    G_t(x,a) = P_V \min\{x + a, D_t\} - P_S (a - \mathcal{I}_{t = 0}x),
+$$
+
+notemos que en el dia $a = 0$ y $D_0 = 0$, entonces $G_0(x,a) = -P_Sx$ donde $C$ es el costo unitario por tener el producto al inicio.
+Notemos que $D_t$ es una variable aleatoria, entonces la función de valor por estado es la siguiente
+
+$$
+    V^\pi(s) =  E[G(s, \pi)]
+$$
+
+Teniendo que la ecuación de Bellman para nuestra función de valor es 
+$$
+    V^\pi(s) = \sum_{a}\pi(a\mid s)\sum_{s'} \mathcal{P}[s' \mid s, a][R(s', a, s) + \gamma V^\pi(s')]
+$$

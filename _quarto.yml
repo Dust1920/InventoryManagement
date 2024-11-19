@@ -1,0 +1,25 @@
+project:
+  type: book
+
+book:
+  title: "Manejo de Inventario"
+  author: "David Peña Peralta"
+  date: "19/11/2024"
+  chapters:
+    - index.qmd
+    - pdm.qmd
+    - dynamics.qmd
+    - description.qmd
+    - actions.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+
+
+

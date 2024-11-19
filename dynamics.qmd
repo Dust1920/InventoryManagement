@@ -1,0 +1,17 @@
+# Dinámica del Modelo.
+
+Recordando la fórmula para nuestro modelo. 
+
+$$
+    X_{t+1} = f(X_t, a_t), f:\mathcal{S}\times \mathcal{A}\to \mathcal{S}. 
+$$
+
+Entonces el modelo que usaremos esta dado por 
+
+$$
+    X_{t+1} = (X_t+a_t-\eta X_{t} - D_{t+1})^+, 
+$${#eq-ModelD}
+
+donde $a_t$ es la cantidad de producto recolodado al final del dia $t$, $\eta$ es el factor descomposición, $D_t$ es la demanda del 
+prodcucto en la dia $t$ y  $(\cdot)^+ = \max\{\cdot, 0\}$. 
+

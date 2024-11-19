@@ -1,0 +1,19 @@
+# Formulación del Proceso de Decisión de Markov.
+
+Para nuestro problema consideraremos un supermercado, centrado en uno de sus pasillos. Suponiendo que en un pasillo se almacena un 
+solo tipo de producto. Definiremos a $K$ la cantidad máxima de producto en el pasillo, $X_t$ a la cantidad del producto disponible 
+para la venta (o la cantidad de producto en el pasillo). Nuestra demanda, o producto solicitado, será denotado por $D_t$ y se 
+considerará una colección de v.a i.i.d. Finalmente, la cantidad recolocada en el pasillo, o producto pedido, será denotada por $a_t$. 
+Entonces, nuestro conjunto de estados $\mathcal{S}$ está dado por el siguiente conjunto
+
+$$
+    \mathcal{S} = \{s\in \mathbb{Z}^+:0\leq s\leq K\}.
+$${#eq-states}
+
+Nuestro conjunto de acciones $\mathcal{A} = \mathcal{S} = \mathbb{Z}^+$, y para $x\in\mathcal{S}$ nuestro conjunto de acciones admisibles esta dado 
+por 
+
+$$
+    \mathcal{A}(x)=\{a\in \mathcal{A}:0 \leq a\leq K - x\}.
+$$
+
