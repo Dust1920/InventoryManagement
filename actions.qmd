@@ -1,4 +1,13 @@
 # Justificación de las acciones. 
 
-Ya comentamos que nuestras acciones, será la cantidad de producto que vamos a solicitar. Entonces nuestras acciones serán números 
-enteros y las acciones serán ejecutadas de forma instantea, al momento. 
+Ya comentamos que nuestras acciones, serán la cantidad de producto que vamos a solicitar. Entonces nuestras acciones serán números enteros las acciones serán ejecutadas de forma instantea. El conjunto de acciones está dado por 
+$$
+    \mathcal{A} = \{z\in \mathbb{Z}^+ : z\leq K \}.
+$$
+
+y para cada $x\in\mathcal{S}$, obtenemos el conjunto de acciones admisibles. 
+
+$$
+    \mathcal{A}(x) = \{z\in \mathbb{Z}^+ : z\leq K - x \}.
+$$
+

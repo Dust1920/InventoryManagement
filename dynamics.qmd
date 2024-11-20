@@ -7,7 +7,6 @@ $$
 $$
 
 Entonces el modelo que usaremos esta dado por 
-
 $$
     X_{t+1} = (X_t+a_t-\eta X_{t} - D_{t+1})^+, 
 $${#eq-ModelD}
