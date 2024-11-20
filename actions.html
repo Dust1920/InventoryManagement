@@ -62,6 +62,8 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -163,7 +165,13 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Ya comentamos que nuestras acciones, será la cantidad de producto que vamos a solicitar. Entonces nuestras acciones serán números enteros y las acciones serán ejecutadas de forma instantea, al momento.</p>
+<p>Ya comentamos que nuestras acciones, serán la cantidad de producto que vamos a solicitar. Entonces nuestras acciones serán números enteros las acciones serán ejecutadas de forma instantea. El conjunto de acciones está dado por <span class="math display">\[
+    \mathcal{A} = \{z\in \mathbb{Z}^+ : z\leq K \}.
+\]</span></p>
+<p>y para cada <span class="math inline">\(x\in\mathcal{S}\)</span>, obtenemos el conjunto de acciones admisibles.</p>
+<p><span class="math display">\[
+    \mathcal{A}(x) = \{z\in \mathbb{Z}^+ : z\leq K - x \}.
+\]</span></p>
 
 
 

@@ -18,7 +18,7 @@
     "href": "dynamics.html",
     "title": "3  Dinámica del Modelo.",
     "section": "",
-    "text": "Recordando la fórmula para nuestro modelo.\n\\[\n    X_{t+1} = f(X_t, a_t), f:\\mathcal{S}\\times \\mathcal{A}\\to \\mathcal{S}.\n\\]\nEntonces el modelo que usaremos esta dado por\n\\[\n    X_{t+1} = (X_t+a_t-\\eta X_{t} - D_{t+1})^+,\n\\tag{3.1}\\]\ndonde \\(a_t\\) es la cantidad de producto recolodado al final del dia \\(t\\), \\(\\eta\\) es el factor descomposición, \\(D_t\\) es la demanda del prodcucto en la dia \\(t\\) y \\((\\cdot)^+ = \\max\\{\\cdot, 0\\}\\)."
+    "text": "Recordando la fórmula para nuestro modelo.\n\\[\n    X_{t+1} = f(X_t, a_t), f:\\mathcal{S}\\times \\mathcal{A}\\to \\mathcal{S}.\n\\]\nEntonces el modelo que usaremos esta dado por \\[\n    X_{t+1} = (X_t+a_t-\\eta X_{t} - D_{t+1})^+,\n\\tag{3.1}\\]\ndonde \\(a_t\\) es la cantidad de producto recolodado al final del dia \\(t\\), \\(\\eta\\) es el factor descomposición, \\(D_t\\) es la demanda del prodcucto en la dia \\(t\\) y \\((\\cdot)^+ = \\max\\{\\cdot, 0\\}\\)."
   },
   {
     "objectID": "description.html",
@@ -32,7 +32,7 @@
     "href": "actions.html",
     "title": "5  Justificación de las acciones.",
     "section": "",
-    "text": "Ya comentamos que nuestras acciones, será la cantidad de producto que vamos a solicitar. Entonces nuestras acciones serán números enteros y las acciones serán ejecutadas de forma instantea, al momento."
+    "text": "Ya comentamos que nuestras acciones, serán la cantidad de producto que vamos a solicitar. Entonces nuestras acciones serán números enteros las acciones serán ejecutadas de forma instantea. El conjunto de acciones está dado por \\[\n    \\mathcal{A} = \\{z\\in \\mathbb{Z}^+ : z\\leq K \\}.\n\\]\ny para cada \\(x\\in\\mathcal{S}\\), obtenemos el conjunto de acciones admisibles.\n\\[\n    \\mathcal{A}(x) = \\{z\\in \\mathbb{Z}^+ : z\\leq K - x \\}.\n\\]"
   },
   {
     "objectID": "references.html",
