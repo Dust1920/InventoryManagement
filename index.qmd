@@ -5,3 +5,5 @@ Donde se presenta una bodega con capacidad máxima $K$. Cada estapa se extrae un
 que denotaremos como la demanda $D_t$, y se solicita una cantidad del producto $a_t$, obteniendo finalmente 
 el nivel de inventario $X_t$ (ver @SRButton). En general se busca minimizar los costos de la 
 bodega (costos por almacenamiento, costos por pérdida, entre otros).
+
+
