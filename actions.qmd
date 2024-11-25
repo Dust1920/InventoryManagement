@@ -10,4 +10,3 @@ y para cada $x\in\mathcal{S}$, obtenemos el conjunto de acciones admisibles.
 $$
     \mathcal{A}(x) = \{z\in \mathbb{Z}^+ : z\leq K - x \}.
 $$
-
