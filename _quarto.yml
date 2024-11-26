@@ -12,6 +12,12 @@ book:
     - description.qmd
     - actions.qmd
     - references.qmd
+  comments:
+    hypothesis: 
+      theme: classic
+      openSidebar: True
+
+
 
 bibliography: references.bib
 
