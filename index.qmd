@@ -1,7 +1,7 @@
 # Introducción
 
-Dentro del area del Control Estocástico, una de los problemas más conocidos son los problemas de inventario. 
-Donde se presenta una bodega con capacidad máxima $K$. Cada estapa se extrae una cantidad de mercancía, la 
+Dentro del área del Control Estocástico, una de los problemas más conocidos son los problemas de inventario. 
+Donde se presenta una bodega con capacidad máxima $K$. Cada etapa se extrae una cantidad de mercancía, la 
 que denotaremos como la demanda $D_t$, y se solicita una cantidad del producto $a_t$, obteniendo finalmente 
 el nivel de inventario $X_t$ (ver @SRButton). En general se busca minimizar los costos de la 
 bodega (costos por almacenamiento, costos por pérdida, entre otros).
