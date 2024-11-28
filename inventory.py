@@ -6,106 +6,93 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-def demmand():
+def demmand(p_k):
     """
-        Demand Model 
+        Demand Model
+        p: Probabily of sell K products
     """
-    r = np.random.geometric(p = 0.05)
+    r = np.random.geometric(p_k)
     return r
 
-def dynamic(x, a, eta):
+
+def l(x, pars):
+    """
+        Function 
+    """
+    eta = pars
+    y = np.ceil(eta * x)
+    return y
+
+
+def dyn(x, a, model_p):
     """
         Dynamic of the Inventory Model
     """
-    d = demmand()
-    f = x + a - d - np.ceil(eta * x)
-    f = max(f, 0)
-    return f, d
+    prob = model_p['p']
+    eta = model_p['eta']
+    d = demmand(prob)
+    f_in = x + a  # In Vale
+    lx = l(x, eta)
+    f_out = d + lx
+    return f_in, f_out, d
 
 
-def dynamic_manual(x, a, d, eta):
+PVI = {"x_0": 100,
+       "T": 50,
+       "K": 200,
+       "SAMPLES": 50}
+
+
+MODEL_PARS = {"sell": 30,
+              "cost": 20,
+              "eta": 0.1,
+              "p": 0.05}
+
+
+def reward_t(x, a, d, mpars):
     """
-        Dynamic Manual Calculus
+        Calculate Rewards in time t
     """
-    f = x + a - d - np.ceil(eta * x)
-    return f
+    p_v = mpars['sell']
+    p_s = mpars["cost"]
+    rew = p_v * min(x + a, d)
+    cost = p_s * a
+    reward = rew - cost
+    return reward
 
-
-def inventory_history(x_0, eta, k, period):
+def icm(ipars, pi, mpars):
     """
-        Inventory Simulation
+        Simulate Inventory Control Model 
     """
-    inv_h = []
-    act_h = []
-    d_h = []
-    x = x_0
-    for _ in range(period):
-        a = 10
-        if x + a > k:
-            a = k - x
-        inv_h.append(x)
-        act_h.append(a)
-        xp, dem_d = dynamic(x, a, eta)
-        d_h.append(dem_d)
-        x = xp
-    inv_h.append(x)
-    return inv_h, act_h, d_h
+    # History Lists
+    i_hist = [ipars['x_0']]
+    d_hist = []
+    rew_hist = [- mpars['cost'] * i_hist[0]]
+    n_stages = ipars["T"]
+    for n in range(n_stages):
+        a = pi[n]
+        fi, fo, d = dyn(i_hist[n],a, mpars)
+        f = fi - fo
+        x = max(f, 0)
+        r = reward_t(x, a, d, mpars)
+        rew_hist.append(r)
+        i_hist.append(x)
+        d_hist.append(d)
+    rew_hist = np.array(rew_hist)
+    return i_hist, d_hist, rew_hist
 
 
-def inv_samples(nums):
-    """
-        Inventory Model Samples
-    """
-    for _ in range(nums):
-        inventory, _, _ = inventory_history(INIT_VALUE, ETA, MAX_CAP, NDAYS)
-        plt.plot(inventory)
-    plt.plot([0, NDAYS], [0,0])
-    plt.plot([0, NDAYS], [MAX_CAP,MAX_CAP])
-    plt.show()
+inventory, inv_out, rt = icm(PVI, [0 for _ in range(PVI['T'])], MODEL_PARS)
 
 
-ETA = 0.1
-INIT_VALUE = 100
-NDAYS = 20
-MAX_CAP = 200
-SAMPLES = 50
-
-# inv_samples(SAMPLES)
-
-inv, policy, dem = inventory_history(INIT_VALUE, ETA, MAX_CAP, NDAYS)
-
-# print(inv)
-# print(len(inv))
-
-
-def ben_by_step(x, a, d, p_s, p_v):
-    """
-        Calculate Benefits by state
-    """
-    in_money = p_v * min(x + a, d)
-    out_money = p_s * a
-    g = in_money - out_money
-    return g
-
-
-def benefits(history, pol, dmd, p_s, p_v):
-    """
-        Calculate the benefits
-    """
-    prize = - history[0] * p_s
-    ben = [prize]
-    for k in range(1,len(history)):
-        x_k = history[k]
-        a_k = pol[k - 1]
-        d_k = dmd[k - 1]
-        ben.append(ben_by_step(x_k, a_k, d_k, p_s, p_v))
-    return ben
-
-
-bs = benefits(inv, policy, dem, p_s = 10, p_v = 10)
-print(len(bs))
-
-
-plt.plot(inv)
-plt.plot(bs)
+fig, ax = plt.subplots(nrows=2, ncols=2, figsize = (13, 8))
+ax[0, 0].plot(rt)
+ax[0, 0].set_xlabel("Stages")
+ax[0, 0].set_ylabel("Reward")
+ax[0, 1].plot(rt.cumsum())
+ax[0, 1].set_xlabel("Stages")
+ax[0, 1].set_ylabel("Accumulated Reward")
+ax[1, 0].plot(inventory)
+ax[1, 0].set_xlabel("Stages")
+ax[1, 0].set_ylabel("Inventory Level")
 plt.show()
