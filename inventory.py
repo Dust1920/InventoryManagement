@@ -2,6 +2,7 @@
     Inventory Management:
         X_p1 = (X + a - D - kX)^+
 """
+
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -37,18 +38,6 @@ def dyn(x, a, model_p):
     return f_in, f_out, d
 
 
-PVI = {"x_0": 100,
-       "T": 50,
-       "K": 200,
-       "SAMPLES": 50}
-
-
-MODEL_PARS = {"sell": 30,
-              "cost": 20,
-              "eta": 0.1,
-              "p": 0.05}
-
-
 def reward_t(x, a, d, mpars):
     """
         Calculate Rewards in time t
@@ -59,6 +48,14 @@ def reward_t(x, a, d, mpars):
     cost = p_s * a
     reward = rew - cost
     return reward
+
+
+def new_state(f):
+    """
+        Calculate the new state
+    """
+    return max(f,0)
+
 
 def icm(ipars, pi, mpars):
     """
@@ -72,14 +69,25 @@ def icm(ipars, pi, mpars):
     for n in range(n_stages):
         a = pi[n]
         fi, fo, d = dyn(i_hist[n],a, mpars)
-        f = fi - fo
-        x = max(f, 0)
+        x = new_state(fi-fo)
         r = reward_t(x, a, d, mpars)
         rew_hist.append(r)
         i_hist.append(x)
         d_hist.append(d)
     rew_hist = np.array(rew_hist)
     return i_hist, d_hist, rew_hist
+
+
+PVI = {"x_0": 100,
+       "T": 50,
+       "K": 200,
+       "SAMPLES": 50}
+
+
+MODEL_PARS = {"sell": 30,
+              "cost": 20,
+              "eta": 0.1,
+              "p": 0.05}
 
 
 inventory, inv_out, rt = icm(PVI, [0 for _ in range(PVI['T'])], MODEL_PARS)
