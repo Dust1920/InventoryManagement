@@ -24,9 +24,6 @@ def admisible_actions(x, k):
     return v
 
 
-
-
-
 def reward_function(x, a, d, p_v, p_c):
     """
         Reward Function: Alternative Cost Function
@@ -69,16 +66,13 @@ def inventory(x_0, policy, p_c, p_v, eta):
 
 if __name__ == "__main__":
     test_policy = [50 if s % 3 == 0 else 0 for s in range(100)]
-
     X0 = 50
-
     H, R, XI = inventory(X0, test_policy,ip.REW_COST, ip.REW_SALE, ip.DYN_ETA)
 
     # print("History", H)
     # print("Policy", test_policy)
     # print("Rewards", R)
     # print("Demmand", XI)
-
 
     model, ax = plt.subplots(nrows=3, ncols = 1)
     ax[0].plot(H)
