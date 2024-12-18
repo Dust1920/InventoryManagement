@@ -3,12 +3,10 @@
 """
 
 import numpy as np
-import matplotlib.pyplot as plt
 import pandas as pd
 from scipy.interpolate import CubicSpline
-import inv_pars as ip
-import inv_model as m
-
+from code import inv_pars as ip
+from code import inv_model as m
 
 
 def expected_reward(x, a, d_v):

@@ -140,6 +140,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./implementation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Implementación.</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -174,32 +180,29 @@ ul.task-list li input[type="checkbox"] {
 
 <p>El modelo <a href="dynamics.html#eq-ModelD">Equation&nbsp;<span>3.1</span></a> pretende responder a la pregunta que denota el modelo ¿Cuánto producto tendré disponible al dia siguiente?. Lo anterior menciona que nuestras etapas <span class="math inline">\(t\in \mathcal{T} = \{t\in \mathbb{Z}^+: t\leq T,T\in \mathbb{N}\}\)</span> representaran los dias dentro de un periodo <span class="math inline">\(T\)</span>, <span class="math inline">\(t\)</span> hace referencia al dia actual, y <span class="math inline">\(t+1\)</span> al dia siguiente. Entonces el modelo general esta dado por</p>
 <p><span class="math display">\[
-    X_{t+1} = (\text{Today} + \text{In}_t - \text{Out}_{t+1})^+.
+    X_{t+1} = (\text{Today} + \text{In}_t - \text{Out}_{t})^+.
 \]</span></p>
 <p>Esto es, la parte positiva del producto que hay “hoy”, es decir, <span class="math inline">\(X_t\)</span>. A eso le agregaremos el producto que entrará hoy al final del dia, en nuestro modelo solo habrá ingreso de producto mediante solicitud (En este caso no consideramos un almacenimiento dentro del supermercado), entonces <span class="math inline">\(\text{In}_t\)</span> esta dado por nuestras acciones <span class="math inline">\(\text{In}_t = a_t\)</span>.</p>
 <p>La parte que saldrá consta de dos elementos. En general consideramos la cantidad de producto que se compró en el dia <span class="math inline">\(t\)</span>. Sin embargo, desconocemos la cantidad requerida, haciendo referencia al dia siguiente. Por lo tanto la demanda está representada por <span class="math inline">\(D_{t+1}\)</span>, la cantidad de producto requerida al dia siguiente. En nuestro modelo también consideramos la salida de producto por considerarse producto no apto para la venta. Entonces</p>
 <p><span class="math display">\[
-    \text{Out}_t = D_{t + 1} + N_t(X_t).
+    \text{Out}_t = D_{t} + N_t(X_t).
 \]</span></p>
 <p>Bajo de la suposición que todos los productos poseen el mismo tiempo de vida con periodos de vida distintos supondremos que cada dia, al final, se retira un factor con respecto a la cantidad actual de producto. <span class="math display">\[
     N_t = \eta X_t
 \]</span></p>
 <p><span class="math display">\[
-    \text{Out}_t = D_{t + 1} + \eta X_t
+    \text{Out}_t = D_{t} + \eta X_t
 \]</span></p>
 <p>Finalmente, nos queda definir la función de costo, en nuestro modelo será la ganancia. Al considerar un periodo finito tenemos que la ganancia total <span class="math inline">\(G\)</span> esta dada por</p>
 <p><span class="math display">\[
-    G(x_0, \pi) = \sum_{t=0}^{T} G_t(X_t, a_t),X_0 = x_0, X_{t+1} = f(X_t, a_t).
+    G(x_0, \pi) = \sum_{t=0}^{T} R_t,X_0 = x_0, X_{t+1} = f(X_t, a_t), R_t = R(x_t,a_t,\xi_t)
 \]</span></p>
-<p>donde <span class="math inline">\(\pi\)</span> es una politica, <span class="math inline">\(\pi = (a_0,a_1, \ldots, a_{N-1})\)</span>. y <span class="math inline">\(G_t\)</span> es la ganancia por etapa, en nuestro caso <span class="math display">\[
-    G_t(x,a) = P_V \min\{x + a, D_t\} - P_S (a - \mathcal{I}_{t = 0}x),
+<p>donde <span class="math inline">\(\pi\)</span> es una politica, <span class="math inline">\(\pi = (a_0,a_1, \ldots, a_{N-1})\)</span>. y <span class="math inline">\(R_t\)</span> es la ganancia por etapa, en nuestro caso <span class="math display">\[
+    R(x,a,\xi) = P_V \min\{x + a, \xi\} - P_C a - P_C \min{\xi - x - a, 0}.
 \]</span></p>
-<p>notemos que en el dia <span class="math inline">\(a = 0\)</span> y <span class="math inline">\(D_0 = 0\)</span>, entonces <span class="math inline">\(G_0(x,a) = -P_Sx\)</span> donde <span class="math inline">\(C\)</span> es el costo unitario por tener el producto al inicio. Notemos que <span class="math inline">\(D_t\)</span> es una variable aleatoria, entonces la función de valor por estado es la siguiente</p>
+<p>Al intervenir una variable aleatoria, entonces nos interesaría el valor esperado.</p>
 <p><span class="math display">\[
-    V^\pi(s) =  E[G(s, \pi)]
-\]</span></p>
-<p>Teniendo que la ecuación de Bellman para nuestra función de valor es <span class="math display">\[
-    V^\pi(s) = \sum_{a}\pi(a\mid s)\sum_{s'} \mathcal{P}[s' \mid s, a][R(s', a, s) + \gamma V^\pi(s')]
+    \mathcal{G}(x) = E_\pi[G\mid X_t = x].
 \]</span></p>
 
 
