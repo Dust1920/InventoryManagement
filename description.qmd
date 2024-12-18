@@ -3,7 +3,7 @@ El modelo @eq-ModelD pretende responder a la pregunta que denota el modelo ¿Cu�
 Lo anterior menciona que nuestras etapas $t\in \mathcal{T} = \{t\in \mathbb{Z}^+: t\leq T,T\in \mathbb{N}\}$ representaran los dias dentro de un periodo $T$, $t$ hace referencia al dia actual, y $t+1$ al dia siguiente. Entonces el modelo general esta dado por 
 
 $$
-    X_{t+1} = (\text{Today} + \text{In}_t - \text{Out}_{t+1})^+.
+    X_{t+1} = (\text{Today} + \text{In}_t - \text{Out}_{t})^+.
 $$  
 
 Esto es, la parte positiva del producto que hay "hoy", es decir, $X_t$. A eso le agregaremos el producto que entrará hoy al final 
@@ -16,7 +16,7 @@ la cantidad de producto requerida al dia siguiente. En nuestro modelo también c
 producto no apto para la venta. Entonces 
 
 $$
-    \text{Out}_t = D_{t + 1} + N_t(X_t).
+    \text{Out}_t = D_{t} + N_t(X_t).
 $$
 
 Bajo de la suposición que todos los productos poseen el mismo tiempo de vida con periodos de vida distintos supondremos que cada dia, 
@@ -26,29 +26,24 @@ $$
 $$
 
 $$
-    \text{Out}_t = D_{t + 1} + \eta X_t
+    \text{Out}_t = D_{t} + \eta X_t
 $$
 
 Finalmente, nos queda definir la función de costo, en nuestro modelo será la ganancia. Al considerar un periodo finito tenemos que la 
 ganancia total $G$ esta dada por 
 
 $$
-    G(x_0, \pi) = \sum_{t=0}^{T} G_t(X_t, a_t),X_0 = x_0, X_{t+1} = f(X_t, a_t).
+    G(x_0, \pi) = \sum_{t=0}^{T} R_t,X_0 = x_0, X_{t+1} = f(X_t, a_t), R_t = R(x_t,a_t,\xi_t)
 $$
 
-donde $\pi$ es una politica, $\pi = (a_0,a_1, \ldots, a_{N-1})$. y $G_t$ es la ganancia por etapa, en nuestro caso
+donde $\pi$ es una politica, $\pi = (a_0,a_1, \ldots, a_{N-1})$. y $R_t$ es la ganancia por etapa, en nuestro caso
 $$
-    G_t(x,a) = P_V \min\{x + a, D_t\} - P_S (a - \mathcal{I}_{t = 0}x),
-$$
-
-notemos que en el dia $a = 0$ y $D_0 = 0$, entonces $G_0(x,a) = -P_Sx$ donde $C$ es el costo unitario por tener el producto al inicio.
-Notemos que $D_t$ es una variable aleatoria, entonces la función de valor por estado es la siguiente
-
-$$
-    V^\pi(s) =  E[G(s, \pi)]
+    R(x,a,\xi) = P_V \min\{x + a, \xi\} - P_C a - P_C \min{\xi - x - a, 0}.
 $$
 
-Teniendo que la ecuación de Bellman para nuestra función de valor es 
+
+Al intervenir una variable aleatoria, entonces nos interesaría el valor esperado. 
+
 $$
-    V^\pi(s) = \sum_{a}\pi(a\mid s)\sum_{s'} \mathcal{P}[s' \mid s, a][R(s', a, s) + \gamma V^\pi(s')]
+    \mathcal{G}(x) = E_\pi[G\mid X_t = x].
 $$
